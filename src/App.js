@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
+import Paper from './components/Paper';
+/* eslint-disable */
+
 
 class App extends Component {
   constructor(props) {
     super(props);
+  }
 
-    this.state = {
-      first,
-    };
+  render() {
+    return (
+      <div>
+        <Paper />
+      </div>
+    );
   }
 }
 
