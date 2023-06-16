@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 // import uniqid from 'uniqid';
 import GeneralInfo from './components/GeneralInfo';
 import Education from './components/Education';
+import Experience from './components/Experience';
 /* eslint-disable */
 
 
@@ -86,7 +87,7 @@ class App extends Component {
     })
   }
 
-  changeStartDate(e) {
+  changeStartDateEdu(e) {
     this.setState({
       education: {
         school: this.state.education.school,
@@ -97,7 +98,7 @@ class App extends Component {
     })
   }
 
-  changeEndDate(e) {
+  changeEndDateEdu(e) {
     this.setState({
       education: {
         school: this.state.education.school,
@@ -107,6 +108,58 @@ class App extends Component {
       }
     })
   }
+
+  changeCompany(e) {
+    this.setState({
+      experience: {
+        company: e.target.value,
+        title: this.state.experience.title,
+        tasks: this.state.experience.tasks,
+        startDate: this.state.experience.startDate,
+        endDate: this.state.experience.endDate,
+      }
+    })
+  }
+
+  changeTasks(e) {
+    this.setState({
+      experience: {
+        company: this.state.experience.company,
+        title: this.state.experience.title,
+        tasks: e.target.value,
+        startDate: this.state.experience.startDate,
+        endDate: this.state.experience.endDate,
+      }
+    })
+  }
+
+  changeStartDateExp(e) {
+    this.setState({
+      experience: {
+        company: this.state.experience.company,
+        title: this.state.experience.title,
+        tasks: this.state.experience.tasks,
+        startDate: e.target.value,
+        endDate: this.state.experience.endDate,
+      }
+    })
+  }
+
+  changeEndDateExp(e) {
+    this.setState({
+      experience: {
+        company: this.state.experience.company,
+        title: this.state.experience.title,
+        tasks: this.state.experience.tasks,
+        startDate: this.state.experience.startDate,
+        endDate: e.target.value,
+      }
+    })
+  }
+
+
+  
+  
 
   render() {
     let buttonText;
@@ -121,8 +174,13 @@ class App extends Component {
         <div>Education</div>
         <Education status={this.state.status} school={this.state.education.school} degree={this.state.education.degree} startDate={this.state.education.startDate} 
             endDate={this.state.education.endDate} changeSchool={this.changeSchool.bind(this)}  
-            changeDegree={this.changeDegree.bind(this)} changeStartDate={this.changeStartDate.bind(this)}
-            changeEndDate={this.changeEndDate.bind(this)} />
+            changeDegree={this.changeDegree.bind(this)} changeStartDate={this.changeStartDateEdu.bind(this)}
+            changeEndDate={this.changeEndDateEdu.bind(this)} />
+        <div>Experience</div>
+        <Experience status={this.state.status} company={this.state.experience.company} title={this.state.experience.title} startDate={this.state.experience.startDate} 
+            endDate={this.state.experience.endDate} changeCompany={this.changeCompany.bind(this)}  
+            changeTasks={this.changeTasks.bind(this)} changeStartDate={this.changeStartDateExp.bind(this)}
+            changeEndDate={this.changeEndDateExp.bind(this)} />
       </form>
     );
   }
