@@ -1,0 +1,33 @@
+input, textarea {
+    margin: 10px;
+}
+
+textarea {
+    vertical-align: top;
+}
+
+button {
+    margin-bottom: 10px;
+}
+
+body {
+    padding: 20px;
+}
+
+.section {
+    font-weight: 800;
+    font-size: 20px;
+}
+
+form {
+    border: 2px solid black;
+    padding: 20px;
+}
+
+.display {
+    line-height: 1.5;
+}
+
+html {
+    font-family: 'Ubuntu', sans-serif;
+}
