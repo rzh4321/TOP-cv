@@ -3,6 +3,10 @@ import React, { Component } from 'react';
 import GeneralInfo from './components/GeneralInfo';
 import Education from './components/Education';
 import Experience from './components/Experience';
+import DisplayGeneralInfo from './components/DisplayGeneralInfo';
+import DisplayEducation from './components/DisplayEducation';
+import DisplayExperience from './components/DisplayExperience';
+
 /* eslint-disable */
 
 
@@ -133,6 +137,18 @@ class App extends Component {
     })
   }
 
+  changeTitle(e) {
+    this.setState({
+      experience: {
+        company: this.state.experience.company,
+        title: e.target.value,
+        tasks: this.state.experience.tasks,
+        startDate: this.state.experience.startDate,
+        endDate: this.state.experience.endDate,
+      }
+    })
+  }
+
   changeStartDateExp(e) {
     this.setState({
       experience: {
@@ -157,6 +173,16 @@ class App extends Component {
     })
   }
 
+  buttonClicked(e) {
+    e.preventDefault();
+    const newStatus = this.state.status === 'typing'? 'submitted': 'typing';
+    this.setState(
+      {
+        status: newStatus,
+      }
+    )
+  }
+
 
   
   
@@ -166,22 +192,33 @@ class App extends Component {
     if (this.state.status === 'typing') buttonText = 'Submit';
     else buttonText = 'Edit';
     return (
-      <form>
-        <button>{buttonText}</button>
-        <div>General Information</div>
-        <GeneralInfo status={this.state.status} name={this.state.generalInfo.name} email={this.state.generalInfo.email} phone={this.state.generalInfo.phone} 
-            changeName={this.changeName.bind(this)} changeEmail={this.changeEmail.bind(this)} changePhone={this.changePhone.bind(this)}/>
-        <div>Education</div>
-        <Education status={this.state.status} school={this.state.education.school} degree={this.state.education.degree} startDate={this.state.education.startDate} 
-            endDate={this.state.education.endDate} changeSchool={this.changeSchool.bind(this)}  
-            changeDegree={this.changeDegree.bind(this)} changeStartDate={this.changeStartDateEdu.bind(this)}
-            changeEndDate={this.changeEndDateEdu.bind(this)} />
-        <div>Experience</div>
-        <Experience status={this.state.status} company={this.state.experience.company} title={this.state.experience.title} startDate={this.state.experience.startDate} 
-            endDate={this.state.experience.endDate} changeCompany={this.changeCompany.bind(this)}  
-            changeTasks={this.changeTasks.bind(this)} changeStartDate={this.changeStartDateExp.bind(this)}
-            changeEndDate={this.changeEndDateExp.bind(this)} />
-      </form>
+      <div>
+        <form>
+          <button onClick={this.buttonClicked.bind(this)}>{buttonText}</button>
+          <div>General Information</div>
+          <GeneralInfo status={this.state.status} name={this.state.generalInfo.name} email={this.state.generalInfo.email} phone={this.state.generalInfo.phone} 
+              changeName={this.changeName.bind(this)} changeEmail={this.changeEmail.bind(this)} changePhone={this.changePhone.bind(this)}/>
+          <div>Education</div>
+          <Education status={this.state.status} school={this.state.education.school} degree={this.state.education.degree} startDate={this.state.education.startDate} 
+              endDate={this.state.education.endDate} changeSchool={this.changeSchool.bind(this)}  
+              changeDegree={this.changeDegree.bind(this)} changeStartDate={this.changeStartDateEdu.bind(this)}
+              changeEndDate={this.changeEndDateEdu.bind(this)} />
+          <div>Experience</div>
+          <Experience status={this.state.status} company={this.state.experience.company} title={this.state.experience.title} startDate={this.state.experience.startDate} 
+              endDate={this.state.experience.endDate} changeCompany={this.changeCompany.bind(this)}  
+              changeTasks={this.changeTasks.bind(this)} changeTitle={this.changeTitle.bind(this)} changeStartDate={this.changeStartDateExp.bind(this)}
+              changeEndDate={this.changeEndDateExp.bind(this)} />
+        </form>
+        <br/>
+        <span>General Information</span>
+        <DisplayGeneralInfo info={this.state.generalInfo} />
+        <span>Education</span>
+        <DisplayEducation info={this.state.education} />
+        <span>Experience</span>
+        <DisplayExperience info={this.state.experience} />
+
+      </div>
+
     );
   }
 }

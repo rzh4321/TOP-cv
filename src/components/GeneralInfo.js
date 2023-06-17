@@ -17,7 +17,7 @@ export default class GeneralInfo extends Component {
         <input type="email" id="email" value={this.props.email} onChange={this.props.changeEmail} disabled={this.props.status === 'submitted'} />
 
         <label htmlFor="phone">Phone:</label>
-        <input type="number" id="phone" value={this.props.phone} onChange={this.props.changeNumber} disabled={this.props.status === 'submitted'} />
+        <input type="number" id="phone" value={this.props.phone} onChange={this.props.changePhone} disabled={this.props.status === 'submitted'} />
       </div>
 
     );
