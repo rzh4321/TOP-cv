@@ -40,137 +40,17 @@ class App extends Component {
     };
   }
 
-
-  changeName(e) {
+  changeState(e) {
+    console.log(Array.from(e.target.attributes))
+    const attributes = Array.from(e.target.attributes).reduce((obj, attr) => {
+      obj[attr.name] = attr.value;
+      return obj;
+    }, {});
+    console.log(attributes)
     this.setState({
-        generalInfo: {
-            name: e.target.value,
-            email: this.state.generalInfo.email,
-            phone: this.state.generalInfo.phone,
-        }
-    })
-  }
-
-  changeEmail(e) {
-    this.setState({
-        generalInfo: {
-            name: this.state.generalInfo.name,
-            email: e.target.value,
-            phone: this.state.generalInfo.phone,
-        }
-    })
-  }
-
-  changePhone(e) {
-    this.setState({
-        generalInfo: {
-            name: this.state.generalInfo.name,
-            email: this.state.generalInfo.email,
-            phone: e.target.value,
-        }
-    })
-  }
-
-  changeSchool(e) {
-    this.setState({
-      education: {
-        school: e.target.value,
-        degree: this.state.education.degree,
-        startDate: this.state.education.startDate,
-        endDate: this.state.education.endDate,
-      }
-    })
-  }
-
-  changeDegree(e) {
-    this.setState({
-      education: {
-        school: this.state.education.school,
-        degree: e.target.value,
-        startDate: this.state.education.startDate,
-        endDate: this.state.education.endDate,
-      }
-    })
-  }
-
-  changeStartDateEdu(e) {
-    this.setState({
-      education: {
-        school: this.state.education.school,
-        degree: this.state.education.degree,
-        startDate: e.target.value,
-        endDate: this.state.education.endDate,
-      }
-    })
-  }
-
-  changeEndDateEdu(e) {
-    this.setState({
-      education: {
-        school: this.state.education.school,
-        degree: this.state.education.degree,
-        startDate: this.state.education.startDate,
-        endDate: e.target.value,
-      }
-    })
-  }
-
-  changeCompany(e) {
-    this.setState({
-      experience: {
-        company: e.target.value,
-        title: this.state.experience.title,
-        tasks: this.state.experience.tasks,
-        startDate: this.state.experience.startDate,
-        endDate: this.state.experience.endDate,
-      }
-    })
-  }
-
-  changeTasks(e) {
-    this.setState({
-      experience: {
-        company: this.state.experience.company,
-        title: this.state.experience.title,
-        tasks: e.target.value,
-        startDate: this.state.experience.startDate,
-        endDate: this.state.experience.endDate,
-      }
-    })
-  }
-
-  changeTitle(e) {
-    this.setState({
-      experience: {
-        company: this.state.experience.company,
-        title: e.target.value,
-        tasks: this.state.experience.tasks,
-        startDate: this.state.experience.startDate,
-        endDate: this.state.experience.endDate,
-      }
-    })
-  }
-
-  changeStartDateExp(e) {
-    this.setState({
-      experience: {
-        company: this.state.experience.company,
-        title: this.state.experience.title,
-        tasks: this.state.experience.tasks,
-        startDate: e.target.value,
-        endDate: this.state.experience.endDate,
-      }
-    })
-  }
-
-  changeEndDateExp(e) {
-    this.setState({
-      experience: {
-        company: this.state.experience.company,
-        title: this.state.experience.title,
-        tasks: this.state.experience.tasks,
-        startDate: this.state.experience.startDate,
-        endDate: e.target.value,
+      [attributes.category]: {
+        ...this.state[attributes.category],
+        [attributes.id]: e.target.value,
       }
     })
   }
@@ -199,17 +79,13 @@ class App extends Component {
           <button onClick={this.buttonClicked.bind(this)}>{buttonText}</button>
           <div className='section'>General Information</div>
           <GeneralInfo status={this.state.status} name={this.state.generalInfo.name} email={this.state.generalInfo.email} phone={this.state.generalInfo.phone} 
-              changeName={this.changeName.bind(this)} changeEmail={this.changeEmail.bind(this)} changePhone={this.changePhone.bind(this)}/>
+              changeState={this.changeState.bind(this)}/>
           <div className='section'>Education</div>
           <Education status={this.state.status} school={this.state.education.school} degree={this.state.education.degree} startDate={this.state.education.startDate} 
-              endDate={this.state.education.endDate} changeSchool={this.changeSchool.bind(this)}  
-              changeDegree={this.changeDegree.bind(this)} changeStartDate={this.changeStartDateEdu.bind(this)}
-              changeEndDate={this.changeEndDateEdu.bind(this)} />
+              endDate={this.state.education.endDate} changeState={this.changeState.bind(this)} />
           <div className='section'>Experience</div>
           <Experience status={this.state.status} company={this.state.experience.company} title={this.state.experience.title} startDate={this.state.experience.startDate} 
-              endDate={this.state.experience.endDate} changeCompany={this.changeCompany.bind(this)}  
-              changeTasks={this.changeTasks.bind(this)} changeTitle={this.changeTitle.bind(this)} changeStartDate={this.changeStartDateExp.bind(this)}
-              changeEndDate={this.changeEndDateExp.bind(this)} />
+              endDate={this.state.experience.endDate} changeState={this.changeState.bind(this)} />
         </form>
         <br/>
         <div className='display'>

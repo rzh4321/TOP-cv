@@ -11,13 +11,13 @@ export default class GeneralInfo extends Component {
     return (
       <div>
         <label htmlFor="name">Name:</label>
-        <input type="text" id="name" value={this.props.name} onChange={this.props.changeName} disabled={this.props.status === 'submitted'} />
+        <input type="text" category="generalInfo" id="name" value={this.props.name} onChange={this.props.changeState} disabled={this.props.status === 'submitted'} />
 
         <label htmlFor="email">Email:</label>
-        <input type="email" id="email" value={this.props.email} onChange={this.props.changeEmail} disabled={this.props.status === 'submitted'} />
+        <input type="email" category="generalInfo" id="email" value={this.props.email} onChange={this.props.changeState} disabled={this.props.status === 'submitted'} />
 
         <label htmlFor="phone">Phone:</label>
-        <input type="number" id="phone" value={this.props.phone} onChange={this.props.changePhone} disabled={this.props.status === 'submitted'} />
+        <input type="number" category="generalInfo" id="phone" value={this.props.phone} onChange={this.props.changeState} disabled={this.props.status === 'submitted'} />
       </div>
 
     );
