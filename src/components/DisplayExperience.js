@@ -1,26 +1,21 @@
-import React, { Component } from 'react';
+import React from 'react';
 /* eslint-disable */
 
 
-export default class DisplayExperience extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
+export default function DisplayExperience({info}) {
+  const {company, title, tasks, startDate, endDate} = info;
     return (
       <div>
-        Company: {this.props.info.company}
+        Company: {company}
         <br />
-        Title: {this.props.info.title}
+        Title: {title}
         <br />
-        Tasks: {this.props.info.tasks}
+        Tasks: {tasks}
         <br />
-        Start date: {this.props.info.startDate}
+        Start date: {startDate}
         <br />
-        End date: {this.props.info.endDate}
+        End date: {endDate}
         <br />
       </div>
     );
-  }
 }

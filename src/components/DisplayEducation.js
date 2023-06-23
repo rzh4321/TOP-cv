@@ -1,24 +1,20 @@
-import React, { Component } from 'react';
+import React from 'react';
 /* eslint-disable */
 
 
-export default class DisplayEducation extends Component {
-  constructor(props) {
-    super(props);
-  }
+export default function DisplayEducation({info}) {
+  const {school, degree, startDate, endDate} = info;
 
-  render() {
     return (
       <div>
-        School: {this.props.info.school}
+        School: {school}
         <br />
-        Degree: {this.props.info.degree}
+        Degree: {degree}
         <br />
-        Start date: {this.props.info.startDate}
+        Start date: {startDate}
         <br />
-        Graduation date: {this.props.info.endDate}
+        Graduation date: {endDate}
         <br />
       </div>
     );
-  }
 }

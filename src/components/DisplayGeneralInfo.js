@@ -1,22 +1,18 @@
-import React, { Component } from 'react';
+import React from 'react';
 /* eslint-disable */
 
 
-export default class DisplayGeneralInfo extends Component {
-  constructor(props) {
-    super(props);
-  }
+export default function DisplayGeneralInfo({info}) {
+  const {name, email, phone} = info;
 
-  render() {
     return (
       <div>
-        Name: {this.props.info.name}
+        Name: {name}
         <br />
-        Email: {this.props.info.email}
+        Email: {email}
         <br />
-        Phone: {this.props.info.phone}
+        Phone: {phone}
         <br />
       </div>
     );
-  }
 }
