@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 // import uniqid from 'uniqid';
 import GeneralInfo from './components/GeneralInfo';
 import Education from './components/Education';
@@ -11,96 +11,66 @@ import './styles/input.css';
 /* eslint-disable */
 
 
-class App extends Component {
-  constructor(props) {
-    super(props);
+function App() {
+  const [status, changeStatus] = useState('typing');
+  const [generalInfo, changeGeneralInfo] = useState({name: "", email: "", phone: ""});
+  const [education, changeEducation] = useState({school: "", degree: "", startDate: "", endDate: ""});
+  const [experience, changeExperience] = useState({company: "", title: "", tasks: "", startDate: "", endDate: ""});
 
-    this.state = {
-      status: 'typing',
-      generalInfo: {
-        name: '',
-        email: '',
-        phone: '',
-      },
-      education:
-        {
-          school: '',
-          degree: '',
-          startDate: '',
-          endDate: '',
-        },
-      experience:
-        {
-          company: '',
-          title: '',
-          tasks: '',
-          startDate: '',
-          endDate: '',
-        },
-    };
-  }
-
-  changeState(e) {
-    console.log(Array.from(e.target.attributes))
+  function changeState(e) {
+    //console.log(Array.from(e.target.attributes))
     const attributes = Array.from(e.target.attributes).reduce((obj, attr) => {
       obj[attr.name] = attr.value;
       return obj;
     }, {});
-    console.log(attributes)
-    this.setState({
-      [attributes.category]: {
-        ...this.state[attributes.category],
-        [attributes.id]: e.target.value,
-      }
-    })
+    //console.log(attributes)
+    if (attributes.category === "generalInfo") {
+      changeGeneralInfo({...generalInfo, [attributes.id]: e.target.value})
+    }
+    else if (attributes.category === "education") {
+      changeEducation({...education, [attributes.id]: e.target.value})
+    }
+    else if (attributes.category === "experience") {
+      changeExperience({...experience, [attributes.id]: e.target.value})
+    }
   }
 
-  buttonClicked(e) {
+  function buttonClicked(e) {
     e.preventDefault();
-    const newStatus = this.state.status === 'typing'? 'submitted': 'typing';
-    this.setState(
-      {
-        status: newStatus,
-      }
-    )
+    const newStatus = status === 'typing'? 'submitted': 'typing';
+    changeStatus(newStatus);
   }
 
-
-  
-  
-
-  render() {
     let buttonText;
-    if (this.state.status === 'typing') buttonText = 'Submit';
+    if (status === 'typing') buttonText = 'Submit';
     else buttonText = 'Edit';
     return (
       <div>
         <form>
-          <button onClick={this.buttonClicked.bind(this)}>{buttonText}</button>
+          <button onClick={buttonClicked}>{buttonText}</button>
           <div className='section'>General Information</div>
-          <GeneralInfo status={this.state.status} name={this.state.generalInfo.name} email={this.state.generalInfo.email} phone={this.state.generalInfo.phone} 
-              changeState={this.changeState.bind(this)}/>
+          <GeneralInfo status={status} name={generalInfo.name} email={generalInfo.email} phone={generalInfo.phone} 
+              changeState={changeState}/>
           <div className='section'>Education</div>
-          <Education status={this.state.status} school={this.state.education.school} degree={this.state.education.degree} startDate={this.state.education.startDate} 
-              endDate={this.state.education.endDate} changeState={this.changeState.bind(this)} />
+          <Education status={status} school={education.school} degree={education.degree} startDate={education.startDate} 
+              endDate={education.endDate} changeState={changeState} />
           <div className='section'>Experience</div>
-          <Experience status={this.state.status} company={this.state.experience.company} title={this.state.experience.title} startDate={this.state.experience.startDate} 
-              endDate={this.state.experience.endDate} changeState={this.changeState.bind(this)} />
+          <Experience status={status} company={experience.company} title={experience.title} startDate={experience.startDate} 
+              endDate={experience.endDate} changeState={changeState} />
         </form>
         <br/>
         <div className='display'>
           <span className='section'>General Information</span>
-          <DisplayGeneralInfo info={this.state.generalInfo} />
+          <DisplayGeneralInfo info={generalInfo} />
           <span className='section'>Education</span>
-          <DisplayEducation info={this.state.education} />
+          <DisplayEducation info={education} />
           <span className='section'>Experience</span>
-          <DisplayExperience info={this.state.experience} />
+          <DisplayExperience info={experience} />
         </div>
 
       </div>
 
     );
-  }
 }
 
 export default App;
